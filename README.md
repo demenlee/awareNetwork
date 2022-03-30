@@ -58,7 +58,7 @@ For using delay detector module, we should make some changes in topology/switche
 	        recv_timestamp = time.time()
 	        if not self.link_discovery:
 	            return
-
+	
 	        msg = ev.msg
 	        try:
 	            src_dpid, src_port_no = LLDPPacket.lldp_parse(msg.data)
@@ -66,7 +66,7 @@ For using delay detector module, we should make some changes in topology/switche
 	            # This handler can receive all the packtes which can be
 	            # not-LLDP packet. Ignore it silently
 	            return
-
+	
 	        dst_dpid = msg.datapath.id
 	        if msg.datapath.ofproto.OFP_VERSION == ofproto_v1_0.OFP_VERSION:
 	            dst_port_no = msg.in_port
@@ -75,7 +75,7 @@ For using delay detector module, we should make some changes in topology/switche
 	        else:
 	            LOG.error('cannot accept LLDP. unsupported version. %x',
 	                      msg.datapath.ofproto.OFP_VERSION)
-
+	
 	        # get the lldp delay, and save it into port_data.
 	        for port in self.ports.keys():
 	            if src_dpid == port.dpid and src_port_no == port.port_no:
@@ -101,7 +101,3 @@ Go into the directory, and run applications. You are suggested to add arguments 
 The last step is to set up a network and connect to Ryu.
 
 If you need to show collected information, you can set the parameter in setting.py. Also, you can define your personal setting, such as topology discovery period, You will find out the information shown in terninal.
-
-Enjoy it! Good Luck!
-
-If you have any question, you can email me. Don't forget to STAR this repository!
